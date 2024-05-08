@@ -17,7 +17,7 @@ class HadithScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColor.appColor,
+      backgroundColor: MyColor.appScaffoldColor,
       body: Obx(() {
         if (databaseController.isLoading.value) {
           return const Center(
@@ -27,8 +27,7 @@ class HadithScreen extends StatelessWidget {
         return CustomScrollView(
           slivers: [
             SliverAppBar(
-              collapsedHeight: 1,
-              toolbarHeight: 0,
+              toolbarHeight: 25,
               elevation: 0,
               backgroundColor: MyColor.appColor,
               flexibleSpace: FlexibleSpaceBar(
@@ -47,7 +46,7 @@ class HadithScreen extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                              top: 7,
+                              top: 15,
                               left: 20,
                             ),
                             child: Column(
@@ -73,20 +72,28 @@ class HadithScreen extends StatelessWidget {
                 ),
               ),
               pinned: true,
-              expandedHeight: 50,
+              expandedHeight: 75,
               clipBehavior: Clip.hardEdge,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(20)
-                )
+              bottom: const PreferredSize(
+                preferredSize: Size.fromHeight(0),
+                child: Material(
+                  color: MyColor.appScaffoldColor,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(25),
+                    topLeft: Radius.circular(25),
+                  ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 20),
+                    ),
+                  ),
+                ),
               ),
             ),
             SliverToBoxAdapter(
               child: Material(
                 color: MyColor.appScaffoldColor,
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20)),
                 clipBehavior: Clip.hardEdge,
                 child: Padding(
                   padding:
