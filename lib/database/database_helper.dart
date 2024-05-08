@@ -1,10 +1,6 @@
-
-
 import 'dart:io';
-//import 'dart:typed_data';
 import 'package:all_hadis/model/chapter_model.dart';
 import 'package:all_hadis/model/hadith_model.dart';
-import 'package:all_hadis/model/section_model.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -98,36 +94,9 @@ class DatabaseHelper {
     });
   }
 
-  Future<List<Section>> getSectionList() async {
+  Future<List<Map<String, dynamic>>> getSections() async {
     Database? db = await database;
-    List<Map<String, dynamic>> maps = await db!.query('section');
-    return List.generate(maps.length, (i) {
-      return Section(
-        id: maps[i]['id'],
-        bookId: maps[i]['book_id'],
-        bookName: maps[i]['book_name'],
-        chapterId: maps[i]['chapter_id'],
-        sectionId: maps[i]['section_id'],
-        title: maps[i]['title'],
-        preface: maps[i]['preface'],
-        number: maps[i]['number'],
-      );
-    });
-  }
-/*  Future<void> insertHadith(Hadith hadith) async {
-    Database db = await database;
-    await db.insert('hadith', hadith.toMap(),
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    return await db!.query('section', columns: ['number', 'title', 'preface']);
   }
 
-  Future<void> updateHadith(Hadith hadith) async {
-    Database db = await database;
-    await db.update('hadith', hadith.toMap(),
-        where: 'id = ?', whereArgs: [hadith.id]);
-  }
-
-  Future<void> deleteHadith(int id) async {
-    Database db = await database;
-    await db.delete('hadith', where: 'id = ?', whereArgs: [id]);
-  }*/
 }

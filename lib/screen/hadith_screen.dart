@@ -85,7 +85,7 @@ class HadithScreen extends StatelessWidget {
                 clipBehavior: Clip.hardEdge,
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   child: Column(
                     children: [
                       Material(
@@ -99,14 +99,14 @@ class HadithScreen extends StatelessWidget {
                             children: [
                               RichText(
                                 text: TextSpan(
-                                  text: '১/১ অধ্যায়: ',
+                                  text: '১/১. অধ্যায়: ',
                                   style: Style()
                                       .headerText
                                       .copyWith(color: MyColor.appColor),
                                   children: <TextSpan>[
                                     TextSpan(
                                         text:
-                                            'আল্লাহু রাসূল ( সাল্লাল্লাহু আলাইহি ওয়া সাল্লাম)- এর প্রতী কিভাবে ওয়াহী [১] শুরু হয়েছিল। ',
+                                        'আল্লাহু রাসূল ( সাল্লাল্লাহু আলাইহি ওয়া সাল্লাম)- এর প্রতী কিভাবে ওয়াহী [১] শুরু হয়েছিল। ',
                                         style: Style().headerText.copyWith(
                                             color: MyColor.appBlackColor,
                                             fontSize: 17)),
@@ -115,20 +115,20 @@ class HadithScreen extends StatelessWidget {
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 15),
+                                const EdgeInsets.symmetric(vertical: 15),
                                 child: SizedBox(
                                   width: double.infinity,
                                   child: Divider(
                                     color:
-                                        MyColor.appBlackColor.withOpacity(.4),
+                                    MyColor.appBlackColor.withOpacity(.4),
                                   ),
                                 ),
                               ),
                               Text(
-                                "এ মর্মে আল্লাহ তা,আলার বাণী: নিশ্চই আমি আপনার প্রতী সেরূপ ওয়াহী প্রেরণ করেছি যেরূপ নূহ ও তার পরবর্তী নবীদের প্রতী ওয়াহী প্রেরণ করেছিলাম।(সূরা আন-নিসা ৪/১৬৩)",
+                                databaseController.sectionsList[1]['number'].toString(),
                                 style: Style().smallText.copyWith(
                                     color:
-                                        MyColor.appBlackColor.withOpacity(0.5),
+                                    MyColor.appBlackColor.withOpacity(0.5),
                                     fontSize: 15),
                               )
                             ],
@@ -149,7 +149,7 @@ class HadithScreen extends StatelessWidget {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -178,7 +178,7 @@ class HadithScreen extends StatelessWidget {
                                       ),
                                       Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Text(databaseController.booksList[0].title!,
                                               style: Style().mediumText),
@@ -224,11 +224,42 @@ class HadithScreen extends StatelessWidget {
                                 height: 20,
                               ),
                               Text(
-                                  databaseController.hadithList[1].ar!,                                  textAlign: TextAlign.right,
-                                  style: Style().arabicText)
+                                  databaseController.hadithList[0].ar!,                                  textAlign: TextAlign.right,
+                                  style: Style().arabicText),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  databaseController.hadithList[0].narrator!,
+                                  style: Style().headerText.copyWith(color: MyColor.color)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  databaseController.hadithList[0].bn!,
+                                  style: Style().headerText.copyWith(fontWeight:FontWeight.normal,color: MyColor.appBlackColor)),
                             ],
                           ),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Material(
+                        color: MyColor.appWhiteColor,
+                        borderRadius: BorderRadius.circular(5),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
+                            child: Text(
+                              "১/১. অধ্যায়:",style: Style().headerText.copyWith(color: MyColor.color),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 25,
                       ),
                     ],
                   ),

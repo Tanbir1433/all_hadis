@@ -9,7 +9,7 @@ class DatabaseController extends GetxController {
   var booksList = <Books>[].obs;
   var chapterList = <Chapter>[].obs;
   var hadithList = <Hadith>[].obs;
-  var sectionList = <Section>[].obs;
+  var sectionsList = <Map<String, dynamic>>[].obs;
   var isLoading = true.obs;
 
   @override
@@ -18,7 +18,7 @@ class DatabaseController extends GetxController {
     fetchBooks();
     fetchChapter();
     fetchHadith();
-    fetchSection();
+    fetchSections();
   }
 
   void fetchBooks() async {
@@ -54,12 +54,12 @@ class DatabaseController extends GetxController {
     }
   }
 
-  void fetchSection() async {
+  void fetchSections() async {
     isLoading.value = true;
     try {
       var dbHelper = DatabaseHelper();
-      var fetchedSection = await dbHelper.getSectionList();
-      sectionList.value = fetchedSection;
+      var fetchedSections = await dbHelper.getSections();
+      sectionsList.value = fetchedSections;
     } finally {
       isLoading.value = false;
     }
