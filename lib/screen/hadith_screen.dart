@@ -27,7 +27,7 @@ class HadithScreen extends StatelessWidget {
         return CustomScrollView(
           slivers: [
             SliverAppBar(
-              collapsedHeight: 2,
+              collapsedHeight: 1,
               toolbarHeight: 0,
               elevation: 0,
               backgroundColor: MyColor.appColor,
@@ -75,6 +75,11 @@ class HadithScreen extends StatelessWidget {
               pinned: true,
               expandedHeight: 50,
               clipBehavior: Clip.hardEdge,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(20)
+                )
+              ),
             ),
             SliverToBoxAdapter(
               child: Material(
@@ -99,17 +104,14 @@ class HadithScreen extends StatelessWidget {
                             children: [
                               RichText(
                                 text: TextSpan(
-                                  text: '১/১. অধ্যায়: ',
+                                  text: databaseController.sectionsList[0]['number']+" ",
                                   style: Style()
-                                      .headerText
+                                      .mediumText
                                       .copyWith(color: MyColor.appColor),
                                   children: <TextSpan>[
                                     TextSpan(
-                                        text:
-                                        'আল্লাহু রাসূল ( সাল্লাল্লাহু আলাইহি ওয়া সাল্লাম)- এর প্রতী কিভাবে ওয়াহী [১] শুরু হয়েছিল। ',
-                                        style: Style().headerText.copyWith(
-                                            color: MyColor.appBlackColor,
-                                            fontSize: 17)),
+                                        text:databaseController.sectionsList[0]['title'],
+                                        style: Style().mediumText),
                                   ],
                                 ),
                               ),
@@ -120,16 +122,15 @@ class HadithScreen extends StatelessWidget {
                                   width: double.infinity,
                                   child: Divider(
                                     color:
-                                    MyColor.appBlackColor.withOpacity(.4),
+                                    MyColor.appBlackColor.withOpacity(.1),
                                   ),
                                 ),
                               ),
                               Text(
-                                databaseController.sectionsList[1]['number'].toString(),
-                                style: Style().smallText.copyWith(
-                                    color:
-                                    MyColor.appBlackColor.withOpacity(0.5),
-                                    fontSize: 15),
+                                databaseController.sectionsList[0]['preface'],
+                                style: Style().mediumText.copyWith(
+                                    color: MyColor.appBlackColor,fontWeight: FontWeight.normal,
+                                    fontSize: 14),
                               )
                             ],
                           ),
@@ -202,7 +203,7 @@ class HadithScreen extends StatelessWidget {
                                               vertical: 6, horizontal: 12),
                                           child: Center(
                                             child: Text(
-                                              "সহিহ হাদিস",
+                                              databaseController.hadithList[0].grade!,
                                               style: Style().smallText,
                                             ),
                                           ),
@@ -253,13 +254,486 @@ class HadithScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
                             child: Text(
-                              "১/১. অধ্যায়:",style: Style().headerText.copyWith(color: MyColor.color),
+                              databaseController.sectionsList[1]['number'],style: Style().headerText.copyWith(color: MyColor.buttonColor),
                             ),
                           ),
                         ),
                       ),
                       const SizedBox(
                         height: 25,
+                      ),
+                      Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 25, horizontal: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          shape: GuiShapeBorder(
+                                            shape: GuiShapePolygon(
+                                              sides: 6,
+                                              cornerRadius: 3,
+                                              startAngle: GeoAngle(degree: 90),
+                                            ),
+                                          ),
+                                          minimumSize: const Size(35, 55),
+                                          backgroundColor: MyColor.buttonColor,
+                                        ),
+                                        onPressed: () {},
+                                        child: Text(
+                                          databaseController.booksList[0].abvrCode!,
+                                          style: const TextStyle(
+                                              color: MyColor.appWhiteColor,
+                                              fontSize: 18),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(databaseController.booksList[0].title!,
+                                              style: Style().mediumText),
+                                          Text(
+                                            "হাদিস: ২",
+                                            style: Style().headerText.copyWith(
+                                                color: MyColor.appColor),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Material(
+                                        color: MyColor.appColor.withOpacity(.7),
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 6, horizontal: 12),
+                                          child: Center(
+                                            child: Text(
+                                              databaseController.hadithList[0].grade!,
+                                              style: Style().smallText,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Icon(
+                                        FontAwesomeIcons.ellipsisVertical,
+                                        color: MyColor.appBlackColor
+                                            .withOpacity(.4),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                  databaseController.hadithList[1].ar!,                                  textAlign: TextAlign.right,
+                                  style: Style().arabicText),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  databaseController.hadithList[1].narrator!,
+                                  style: Style().headerText.copyWith(color: MyColor.color)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  databaseController.hadithList[1].bn!,
+                                  style: Style().headerText.copyWith(fontWeight:FontWeight.normal,color: MyColor.appBlackColor)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Material(
+                        color: MyColor.appWhiteColor,
+                        borderRadius: BorderRadius.circular(5),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
+                            child: Text(
+                              databaseController.sectionsList[2]['number'],style: Style().headerText.copyWith(color: MyColor.buttonColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 25, horizontal: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          shape: GuiShapeBorder(
+                                            shape: GuiShapePolygon(
+                                              sides: 6,
+                                              cornerRadius: 3,
+                                              startAngle: GeoAngle(degree: 90),
+                                            ),
+                                          ),
+                                          minimumSize: const Size(35, 55),
+                                          backgroundColor: MyColor.buttonColor,
+                                        ),
+                                        onPressed: () {},
+                                        child: Text(
+                                          databaseController.booksList[0].abvrCode!,
+                                          style: const TextStyle(
+                                              color: MyColor.appWhiteColor,
+                                              fontSize: 18),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(databaseController.booksList[0].title!,
+                                              style: Style().mediumText),
+                                          Text(
+                                            "হাদিস: ৩",
+                                            style: Style().headerText.copyWith(
+                                                color: MyColor.appColor),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Material(
+                                        color: MyColor.appColor.withOpacity(.7),
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 6, horizontal: 12),
+                                          child: Center(
+                                            child: Text(
+                                              databaseController.hadithList[0].grade!,
+                                              style: Style().smallText,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Icon(
+                                        FontAwesomeIcons.ellipsisVertical,
+                                        color: MyColor.appBlackColor
+                                            .withOpacity(.4),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                  databaseController.hadithList[2].ar!,                                  textAlign: TextAlign.right,
+                                  style: Style().arabicText),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  databaseController.hadithList[2].narrator!,
+                                  style: Style().headerText.copyWith(color: MyColor.color)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  databaseController.hadithList[2].bn!,
+                                  style: Style().headerText.copyWith(fontWeight:FontWeight.normal,color: MyColor.appBlackColor)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Material(
+                        color: MyColor.appWhiteColor,
+                        borderRadius: BorderRadius.circular(5),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
+                            child: Text(
+                              databaseController.sectionsList[3]['number'],style: Style().headerText.copyWith(color: MyColor.buttonColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 25, horizontal: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          shape: GuiShapeBorder(
+                                            shape: GuiShapePolygon(
+                                              sides: 6,
+                                              cornerRadius: 3,
+                                              startAngle: GeoAngle(degree: 90),
+                                            ),
+                                          ),
+                                          minimumSize: const Size(35, 55),
+                                          backgroundColor: MyColor.buttonColor,
+                                        ),
+                                        onPressed: () {},
+                                        child: Text(
+                                          databaseController.booksList[0].abvrCode!,
+                                          style: const TextStyle(
+                                              color: MyColor.appWhiteColor,
+                                              fontSize: 18),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(databaseController.booksList[0].title!,
+                                              style: Style().mediumText),
+                                          Text(
+                                            "হাদিস: 8",
+                                            style: Style().headerText.copyWith(
+                                                color: MyColor.appColor),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Material(
+                                        color: MyColor.appColor.withOpacity(.7),
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 6, horizontal: 12),
+                                          child: Center(
+                                            child: Text(
+                                              databaseController.hadithList[0].grade!,
+                                              style: Style().smallText,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Icon(
+                                        FontAwesomeIcons.ellipsisVertical,
+                                        color: MyColor.appBlackColor
+                                            .withOpacity(.4),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                  databaseController.hadithList[3].ar!,                                  textAlign: TextAlign.right,
+                                  style: Style().arabicText),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  databaseController.hadithList[3].narrator!,
+                                  style: Style().headerText.copyWith(color: MyColor.color)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  databaseController.hadithList[3].bn!,
+                                  style: Style().headerText.copyWith(fontWeight:FontWeight.normal,color: MyColor.appBlackColor)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Material(
+                        color: MyColor.appWhiteColor,
+                        borderRadius: BorderRadius.circular(5),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
+                            child: Text(
+                              databaseController.sectionsList[4]['number'],style: Style().headerText.copyWith(color: MyColor.buttonColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 25, horizontal: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          shape: GuiShapeBorder(
+                                            shape: GuiShapePolygon(
+                                              sides: 6,
+                                              cornerRadius: 3,
+                                              startAngle: GeoAngle(degree: 90),
+                                            ),
+                                          ),
+                                          minimumSize: const Size(35, 55),
+                                          backgroundColor: MyColor.buttonColor,
+                                        ),
+                                        onPressed: () {},
+                                        child: Text(
+                                          databaseController.booksList[0].abvrCode!,
+                                          style: const TextStyle(
+                                              color: MyColor.appWhiteColor,
+                                              fontSize: 18),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(databaseController.booksList[0].title!,
+                                              style: Style().mediumText),
+                                          Text(
+                                            "হাদিস: 5",
+                                            style: Style().headerText.copyWith(
+                                                color: MyColor.appColor),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Material(
+                                        color: MyColor.appColor.withOpacity(.7),
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 6, horizontal: 12),
+                                          child: Center(
+                                            child: Text(
+                                              databaseController.hadithList[0].grade!,
+                                              style: Style().smallText,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Icon(
+                                        FontAwesomeIcons.ellipsisVertical,
+                                        color: MyColor.appBlackColor
+                                            .withOpacity(.4),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                  databaseController.hadithList[4].ar!,                                  textAlign: TextAlign.right,
+                                  style: Style().arabicText),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  databaseController.hadithList[4].narrator!,
+                                  style: Style().headerText.copyWith(color: MyColor.color)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  databaseController.hadithList[4].bn!,
+                                  style: Style().headerText.copyWith(fontWeight:FontWeight.normal,color: MyColor.appBlackColor)),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),

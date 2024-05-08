@@ -47,11 +47,7 @@ class DatabaseHelper {
       return Books(
         id: maps[i]['id'],
         title: maps[i]['title'],
-        titleAr: maps[i]['title_ar'],
-        numberOfHadis: maps[i]['number_of_hadis'],
         abvrCode: maps[i]['abvr_code'],
-        bookName: maps[i]['book_name'],
-        bookDescr: maps[i]['book_descr'],
       );
     });
   }
@@ -62,12 +58,7 @@ class DatabaseHelper {
     return List.generate(maps.length, (i) {
       return Chapter(
         id: maps[i]['id'],
-        chapterId: maps[i]['chapter_id'],
-        bookId: maps[i]['book_id'],
         title: maps[i]['title'],
-        number: maps[i]['number'],
-        hadisRange: maps[i]['hadis_range'],
-        bookName: maps[i]['book_name'],
       );
     });
   }
@@ -78,16 +69,10 @@ class DatabaseHelper {
     return List.generate(maps.length, (i) {
       return Hadith(
         hadithId: maps[i]['hadith_id'],
-        bookId: maps[i]['book_id'],
-        bookName: maps[i]['book_name'],
-        chapterId: maps[i]['chapter_id'],
-        sectionId: maps[i]['section_id'],
         narrator: maps[i]['narrator'],
         bn: maps[i]['bn'],
         ar: maps[i]['ar'],
-        arDiacless: maps[i]['ar_diacless'],
         note: maps[i]['note'],
-        gradeId: maps[i]['grade_id'],
         grade: maps[i]['grade'],
         gradeColor: maps[i]['grade_color'],
       );
