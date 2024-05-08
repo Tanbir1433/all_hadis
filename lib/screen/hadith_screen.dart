@@ -72,7 +72,7 @@ class HadithScreen extends StatelessWidget {
                 ),
               ),
               pinned: true,
-              expandedHeight: 75,
+              expandedHeight: 65,
               clipBehavior: Clip.hardEdge,
               bottom: const PreferredSize(
                 preferredSize: Size.fromHeight(0),
@@ -85,7 +85,7 @@ class HadithScreen extends StatelessWidget {
                   child: SizedBox(
                     width: double.infinity,
                     child: Padding(
-                      padding: EdgeInsets.only(top: 20),
+                      padding: EdgeInsets.only(top: 15),
                     ),
                   ),
                 ),
